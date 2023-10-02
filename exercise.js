@@ -33,16 +33,16 @@
 
 // console.log(result);
 
-const lines = 6;
-let result = '';
+// const lines = 6;
+// let result = '';
 
-for(let i = 1; i <= lines; i++){
-    for(let j = lines; j > i; j--){
-        result += " ";
-    }
-    for(let k = 1; k < i*2; k++){
-        result += "*";
-    }
-    result += "\n";
-}
-console.log(result);
+// for(let i = 1; i <= lines; i++){
+//     for(let j = lines; j > i; j--){
+//         result += " ";
+//     }
+//     for(let k = 1; k < i*2; k++){
+//         result += "*";
+//     }
+//     result += "\n";
+// }
+// console.log(result);
