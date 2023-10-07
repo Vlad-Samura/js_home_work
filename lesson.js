@@ -76,6 +76,7 @@ function getTimeFromMinutes(num) {
         return "Ошибка, проверьте данные";}        
     let hours = Math.ceil(num / 60) - 1;
     if (hours == -1) hours = 0;
+    if (num == 60) hours = 1;
     const minutes = num % 60 ;
     let horusText = ""
     if(hours == 1){
@@ -92,8 +93,10 @@ function getTimeFromMinutes(num) {
 // Задача
 // Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них. Если один из аргументов не является числом или их меньше 4 - возвращается 0. Дробные числа разрешены.
 
-function findMaxNumber() {
-
+function findMaxNumber(a, b, c, d) {
+    if(typeof(a) != "number" || typeof(b) != "number" || 
+    typeof(c) != "number" || typeof(d) != "number") return 0;
+    return Math.max(a, b, c, d);
 }
 
 //******************************************************************************/
@@ -101,8 +104,21 @@ function findMaxNumber() {
 // Создайте функцию, которая будет принимать в себя один аргумент-целое положительное число. Она должна возвращать строку, в которой будут через пробел выведены числа Фибоначчи. Причем, их количество должно быть равно переданному аргументу.
 // Если переданный аргумент не число - вернуть пустую строку. Решать без применения рекурсии.
 
-function fib() {
+function fib(a) {
+    if(typeof(a) != "number"  || a <= 0 || !Number.isInteger(a)) return "";
+    if(a == 1) return "0"
+    let result = "0 1";
+    let n1 = 0;
+    let n2 = 1;
+    for(let i = 2; i < a; i++){
+        let prom = n1 + n2;
+        result += (" " + prom);
+        n1 = n2;
+        n2 = prom;
+    }
     
+    console.log(result);
+    return result;
 }
 
 
