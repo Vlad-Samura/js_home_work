@@ -12,6 +12,24 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
+/* Задания на урок:
+
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
+
+
 'use strict';
 
 const movieDB = {
@@ -27,8 +45,10 @@ const movieDB = {
 const adv = document.querySelectorAll('.promo__adv img'),
       poster = document.querySelector('.promo__bg'),
       genre = poster.querySelector('.promo__genre'),
-      moveList = document.querySelector(".promo__interactive-list");
-
+      moveList = document.querySelector(".promo__interactive-list"),
+      form = document.querySelector('.add'),
+      addInput = form.querySelector('.adding__input');
+    
 
 adv.forEach(function (item) {
     item.remove();
@@ -37,17 +57,44 @@ adv.forEach(function (item) {
 genre.textContent = "ДРАМА";
 poster.style.backgroundImage = "url('img/bg.jpg')";
 
-moveList.innerHTML = "";
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+    movieDB.movies.push(pruningTheLine(addInput.value, 21));
+    vievMovies();
+});
 
-movieDB.movies.sort();
 
-movieDB.movies.forEach((film, i) =>{
+function pruningTheLine(str, n){
+    if(str.length > n){
+        return str.slice(0, n) + "...";
+    } else {
+        return str
+    }
+}
+
+function vievMovies(){
+    moveList.innerHTML = "";
+    movieDB.movies.sort();
+    movieDB.movies.forEach((film, i) =>{
     moveList.innerHTML += `
     <li class="promo__interactive-item">${i+1}. ${film}
         <div class="delete"></div>
     </li>
     `;
-});
+    }); 
+
+    document.querySelectorAll('.delete').forEach((btn, i) =>{
+        btn.addEventListener('click', function(){
+            movieDB.movies.splice(i, 1);      
+            vievMovies();
+        });
+    });  
+}
+
+vievMovies();
+
+
+
 
 
 
