@@ -47,7 +47,8 @@ const adv = document.querySelectorAll('.promo__adv img'),
       genre = poster.querySelector('.promo__genre'),
       moveList = document.querySelector(".promo__interactive-list"),
       form = document.querySelector('.add'),
-      addInput = form.querySelector('.adding__input');
+      addInput = form.querySelector('.adding__input'),
+      checkbox = form.querySelector('[type="checkbox"]');
     
 
 adv.forEach(function (item) {
@@ -59,7 +60,11 @@ poster.style.backgroundImage = "url('img/bg.jpg')";
 
 form.addEventListener('submit', function(event){
     event.preventDefault();
-    movieDB.movies.push(pruningTheLine(addInput.value, 21));
+    if(addInput.value){
+        movieDB.movies.push(pruningTheLine(addInput.value, 21));
+    }
+    if(checkbox.checked) console.log("Добавляем любимый фильм");
+    
     vievMovies();
 });
 
